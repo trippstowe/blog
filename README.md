@@ -1,8 +1,10 @@
+
 #Cloud Native Applications in a Private Cloud
 
 In a large enterprise environment where most applications serve a small amount of users and rely heavily on large internal resources like databases and queuing systems, cloud native concepts can benefit an enterprise application in many different ways. A cloud native architecture can save resources, create more durable applications and provide many other user benefits.
 
 ##Hoards of Small Applications
+
 ###Not 2 application with 1000 servers each, 1000 applications with 2 servers each
 Enterprise software developers can be responsible for hundreds of applications with small user bases that were traditionally hosted side by side on the same application and web servers. Shared run-times create many problems that include large blast radius, release/update downtime, log aggregation confusion, etc.
 
@@ -12,7 +14,7 @@ Enterprise applications usually require interfacing with a large resource that i
 **Identify and abstract the application from these resources.**
 
 * A middle-ground abstraction is to create API layers to these resources, preferably REST. 
-    * This allows to keep ACID requirements where needed. Transactions, naturally, bind the application to external resource. If either caller or the callee fail a considerable amount of coupling is required to rollback.
+	* This allows to keep ACID requirements where needed. Transactions, naturally, bind the application to external resource. If either caller or the callee fail a considerable amount of coupling is required to rollback.
     * A non-transactional *call and forget* will decouple the application from the resource, but there are very few ways to recover from failure.
 * Using asynchronous communication will truly decouple from the resource. Fire and forget on a queuing system like AMQP allows for auto-retries, dead-letter queuing, fan-outs, and many other solutions for a communication breakdown between the sender and the receiver that would make Led Zeppelin proud.
 * Eventual Consistency is good enough for a lot of use-cases. The question that needs to be asked is "Does the transaction need to be completely done to move on or can the application checked back when the data is needed?" If the application can have eventual consistency there is a cost and time savings.
