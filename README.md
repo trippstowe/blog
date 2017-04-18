@@ -1,5 +1,5 @@
 
-# Cloud Native Applications in a Private Cloud**
+# Cloud Native Applications in a Private Cloud
 
 In a large enterprise environment where most applications serve a small amount of users and rely heavily on large internal resources like databases and queuing systems, cloud native concepts can benefit an enterprise application in many different ways. A cloud native architecture can save resources, create more durable applications and provide many other user benefits.
 
