@@ -1,15 +1,14 @@
 
 # Cloud Native Applications in a Private Cloud
 
-In a large enterprise environment where most applications serve a small amount of users and rely heavily on large internal resources like databases and queuing systems, cloud native concepts can benefit an enterprise application in many different ways. A cloud native architecture can save resources, create more durable applications and provide many other user benefits.
+In large enterprise environments, most applications serve a small amount of users and rely heavily on large internal resources. A cloud native architecture can save resources, create more durable applications and provide other user benefits. 
 
 ## Hoards of Small Applications
 
-### Not 2 application with 1000 servers each, 1000 applications with 2 servers each
-Enterprise software developers can be responsible for hundreds of applications with small user bases that were traditionally hosted side by side on the same application and web servers. Shared run-times create many problems that include large blast radius, release/update downtime, log aggregation confusion, etc.
+### 1000 applications with 2 servers per
+Enterprise software developers are often responsible for hundreds of applications with small user bases. Traditionally, these applications were hosted on a server side by side. Shared run-times between applications often create problems including large blast radius, release/update downtime, and log aggregation confusion... to name a few. In addition to resource sharing, enterprise servers may contain sensitive data, firewalls, that impede and increase traffic to the cloud. 
 
-### Large central data (or other resource) requirement
-Enterprise applications usually require interfacing with a large resource that is in turn interfaced with many other applications. These large resources sometimes contain sensitive data, firewalls, large data or CPU requirements that impede it's movement to the cloud. These resources are usually monolithic and cross many domains that also make it difficult for applications that interface with it to break off and take advantage of public cloud resources.
+These resources are usually monolithic and cross many domains that also make it difficult for applications that interface with it to break off and take advantage of public cloud resources.
 
 **Identify and abstract the application from these resources.**
 
