@@ -6,20 +6,20 @@ In large enterprise environments, most applications serve a small amount of user
 ## Hoards of Small Applications
 
 ### 1000 applications with 2 servers per
-Enterprise software developers are often responsible for hundreds of applications with small user bases. Traditionally, these applications were hosted on a server side by side. Shared run-times between applications often create problems including large blast radius, release/update downtime, and log aggregation confusion... to name a few. In addition to resource sharing, enterprise servers may contain sensitive data, firewalls, that impede and increase traffic to the cloud. Also, server resources may be monolithic and cross several domains, adding another hurdle for applications to break off and take advantage of public cloud resources.
+Enterprise software developers are often responsible for hundreds of applications with small user bases. Traditionally, these applications were hosted on a server side by side. Shared run-times between applications often create problems including large blast radius, release/update downtime, and log aggregation confusion... to name a few. In addition to resource sharing, enterprise servers may contain sensitive data, firewalls, that impede migration and increase traffic to the cloud. Also, server resources may be monolithic and cross several domains, adding another hurdle for applications to break off and take advantage of public cloud resources.
 
 **Identify and abstract the application from these resources.**
 
-* Middle-ground abstraction: create API layers to these resources (name them), preferably REST. 
+* Middle-ground abstraction: create API layers to these resources (databases, webservices, ESBs), preferably REST. 
 	* This allows to keep ACID requirements where needed. Transactions, naturally, bind the application to external resource. Warning, if either caller or the callee fail, a considerable amount of coupling is required to rollback.
     * A non-transactional *call and forget* can decouple the application from the resource. Warning: there are very few ways to recover from a failure.
-* True decoupling: asynchronous communication will truly decouple (what from what?). Fire and forget on a queuing system like AMQP allows for auto-retries, dead-letter queuing, fan-outs, and many other solutions for a communication breakdown between the sender and the receiver.
+* True decoupling: asynchronous communication will truly decouple the applicaition to the enterprise resource. Fire and forget on a queuing system like AMQP allows for auto-retries, dead-letter queuing, fan-outs, and many other solutions for a communication breakdown between the sender and the receiver.
 
-Eventual Consistency suffices for many of use-cases. The question, "Does the transaction need to be completely done to move on or can the application checked back when the data is needed?" If the application can have eventual consistency, there is cost and time savings with [the something something] approach.
+Eventual Consistency suffices for many of use-cases. The question, "Does the transaction need to be completely done to move on or can the application checked back when the data is needed?" If the application can have eventual consistency, there is cost and time savings with an eventual consistency approach.
 
 ## From Monolith to 12 factor
 ### Break off small pieces
-Small pieces from the same domain or those which can handle an asynchronous coupling, are good candidates to move to a cloud native architecture. Replacing a new piece of the application and tying back to the monolith, coupled as loosely as possible, you can begin to gain some of the advantages of cloud native architecture. 12 factor application architecture are important guidelines to follow when rearchitecting monolith pieces. Stateless applications architecture and design one of the fundamental concepts that needs to be achieved (I don't understand this sentence). It is important to remove any environment level state to the application.
+Small pieces from the same domain or those which can handle an asynchronous coupling, are good candidates to move to a cloud native architecture. Replacing a new piece of the application and tying back to the monolith, coupled as loosely as possible, the application begin to gain some of the advantages of cloud native architecture. 12 factor application architecture are important guidelines to follow when rearchitecting monolith pieces. Stateless applications design and architecture are the fundamental 12 factor concepts that needs to be achieved. It is important to remove any environment level state to the application.
 
 ### Containerization
 Consider Docker containers for ease of deployment and concise application stack structure. Containers allow for operating system level separation that will make it possible to separate the application run time from the container runtime. Container management software like Kubernetes will allow for ease of deployment and management of the containers as well as cohesion between containers that need to interact.
@@ -29,16 +29,16 @@ One of the key concepts to cloud native architecture is: the application environ
 ### Cows vs Pets (Chickens vs Parrots)
 > "Everything fails all the time." --Warner Vogols
 
-Build and architect your applications and environments with an eye to failure, so that if failure occurs, it is expected and recoverable. Also, in case of a failure, design the application envirnment to shutdown gracefully, and, start up fast. A tested and repeatable orchestration will allow the application, and its environment, to quickly recover. When an application and environment fail, instead of spending time to find the problem and fix the environment, it's often beneficial to throw away the environment and start up a new one. Often when a troubled application stack is thrown away and rebuilt, the problem will be solved (think of rebooting). If a root cause analysis is needed after a failure, this can be done after recovery from logging and event based monitoring. .
+Build and architect your applications and environments with an eye to failure, so that when failure occurs, it is expected and recoverable. Also design the application envirnment to shutdown gracefully, and, start up fast. A tested and repeatable orchestration will allow the application, and its environment, to quickly recover. When an application and environment fail, instead of spending time to find the problem and fix the environment, it's can be beneficial to throw away the environment and start up a new one. Often when a troubled application stack is thrown away and rebuilt, the problem will be solved (think of rebooting). If a root cause analysis is needed after a failure, this can be done after recovery from logging and event based monitoring.
 
-With proper continuous integration and delivery the application environment should rebuild the whole environment when deploying an application to a testing environment. This accomplishes a couple of things:
+With proper continuous integration and continuous delivery the application environment should rebuild the whole environment when deploying an application to a testing environment. This accomplishes a couple of things:
 
 1. Release process consistency. Every time there is a release of an application environment if happens the same way from development, to testing, to production.
-2. Practice and testing of the disposing and rebuilding of an application environment.
+2. Practice makes perfect. Practice and testing of the disposing and rebuilding of an application environment.
 
 ## Reap the Benefits
 ### Recovering Testing and SDLC environments
-With disposable environments, resources are saved by only keeping environments up long enough to test, then deleting them. Consider throwing away environments at no test times such as overnight or on weekends. Loosely coupled applications can recover from other services not responding for a time. Create an environment that will exercise the cloud native concepts, so that when it happens in production, it has happened before in testing. 
+With disposable environments, resources are saved by only keeping environments up long enough to test, then deleting them. Consider throwing away environments at off test times such as overnight or on weekends. Loosely coupled applications can recover from other services not responding for a time. Create an environment that will exercise the cloud native concepts, so that when it happens in production, it has happened before in testing. 
 
 ### A/B testing
 Smaller application environments that are more self contained and are loosely coupled to other application environments, simplify the deployment of two different versions of the the environment for UX testing.
