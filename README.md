@@ -40,14 +40,12 @@ With proper continuous integration and continuous delivery the application envir
 ### Recovering Testing and SDLC environments
 With disposable environments, resources are saved by only keeping environments up long enough to test, then deleting them. Consider throwing away environments at off test times such as overnight or on weekends. Loosely coupled applications can recover from other services not responding for a time. Create an environment that will exercise the cloud native concepts, so that when it happens in production, it has happened before in testing. 
 
-### A/B testing
-Smaller application environments that are more self contained and are loosely coupled to other application environments, simplify the deployment of two different versions of the the environment for UX testing.
-
-### Blue/Green deployments
-Zero downtime releases where the new version of the application environment is deployed along side of the older version. The traffic can be bled off the older version to the newer version. Once all the traffic is bled off the old version can be thrown away, or kept around and off-line for analysis if needed. Blue/Green deployments will open up release windows since they do not impact the users, allowing continuous delivery to production. If all the tests have passed and there is no user impact, continuously deploy working versions.
+### Ease of multiple deployments
+Smaller application environments that are more self contained and are loosely coupled to other application environments, simplify the deployment of two different versions of the the environment. This cold be used for the elusive A/B testing for UX prototypes.
+Also, zero downtime releases where the new version of the application environment is deployed along side of the older version to accomplish blue/green deployments. The traffic can be bled off the older version to the newer version. Once all the traffic is bled off the old version can be thrown away, or kept around and off-line for analysis if needed. Blue/Green deployments will open up release windows since they do not impact the users, allowing continuous delivery to production. If all the tests have passed and there is no user impact, continuously deploy working versions.
 
 ## Auto-scaling
-Horizontally scaling of the application environments up or down for the need of the users and the applications. A stateless cloud native application can easily add or subtract instances of itself to match the needs of the application.
+Horizontally scaling of the application environments up or down for the need of the users and the applications. A stateless cloud native application can easily add or subtract instances of itself to match the needs of the application. When the need of CPU, memory or traffic load increases, the ability to horizontally scale with more application environments decreases cost and downtime required opposed to putting the application in a bigger environment and vertically scaling.
 
 ### Stop wasting compute!
 Build the application environment to have enough for normal load, failure and scale-up time. When needed, scale-up by increasing the amount of application environments to help out with the workload. The application environment can be scaled up on scheduled times, like prime time, or according to a system or application metric like CPU use percentage or queue backup. It is almost as important to scale down to take full advantage of the cloud native application environment and save resources.
